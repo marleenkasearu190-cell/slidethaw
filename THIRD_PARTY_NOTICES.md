@@ -1,8 +1,9 @@
 # Third-Party Notices And Provenance
 
 The reconstruction Skill is the user's complete existing v2.2 implementation. No source
-license was found in that folder. Licensing it for public distribution remains subject
-to the maintainer confirming ownership/redistribution rights and the selected license.
+license was found in that folder. The maintainer authorized public publication and
+explicitly chose not to assign a project-wide license. No MIT, Apache-2.0 or other
+project-wide open-source license is assigned to the Skill or synthetic example.
 The original Skill metadata and validation record are preserved. New publishing helpers,
 documentation and the explicitly synthetic example were authored during this packaging task.
 

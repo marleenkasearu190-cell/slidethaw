@@ -20,5 +20,6 @@ CI exercises portable tests. Host-dependent builds and actual Office acceptance 
 separate evidence. Mark untested capabilities accurately. Any sample needs its own source,
 rights and editing-boundary explanation.
 
-The public project license has not yet been selected during private prerelease preparation.
-License and contribution terms must be settled before public contributions are solicited.
+The maintainer has explicitly chosen not to set a project-wide license at this time.
+Bug reports are welcome. Agree on applicable contribution terms with the maintainer
+before submitting code for inclusion; no project-wide open-source license is implied.

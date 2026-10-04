@@ -29,8 +29,8 @@ See [the actual test record](docs/validation.md).
 
 ## Quick Start
 
-Clone the repository (authorized access is required while it is private) or extract the
-prepared source archive, install the public Python dependency, then copy the complete Skill
+Clone the public repository or extract the prepared source archive, install the public
+Python dependency, then copy the complete Skill
 into a **new** repo-scoped Codex discovery directory:
 
 ```sh
@@ -92,11 +92,11 @@ full editability, unattended conversion or platform compatibility claim is made.
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md), [security guidance](SECURITY.md) and
 [troubleshooting](docs/troubleshooting.md). The Skill invocation name remains
-`rebuild-ppt-image-compare`, with metadata version 2.2. The proposed first repository
-release is `v0.1.0-alpha.1`; a release will be linked only after it actually exists.
+`rebuild-ppt-image-compare`, with metadata version 2.2. The first repository prerelease is
+`v0.1.0-alpha.1`; see its [release notes](docs/releases/v0.1.0-alpha.1.md).
 
 This independent project is maintained by [marleenkasearu190-cell](https://github.com/marleenkasearu190-cell).
-The [repository](https://github.com/marleenkasearu190-cell/slidethaw) is currently private.
-No public Release has been published. Public scope and code licensing remain subject
-to the maintainer's confirmation before public release.
+The [repository](https://github.com/marleenkasearu190-cell/slidethaw) is public.
+The maintainer has chosen not to assign a project-wide license at this time. Public
+availability does not imply an MIT, Apache-2.0 or other project-wide open-source license.
 External components retain their own terms. See [third-party notices](THIRD_PARTY_NOTICES.md).

@@ -52,7 +52,8 @@ relationships, embeddings and font checks. Gitleaks 8.30.1 scanned the isolated
 distribution snapshot plus expanded PPTX XML and reported no leaks. No credentials,
 personal source paths, runtime files, fonts or original user projects are distributed.
 This combines automated checks with source/material review; it is not an absolute
-security guarantee. Source and sample licensing still await maintainer confirmation.
+security guarantee. The maintainer authorized public publication and explicitly chose
+not to set a project-wide license for the source or sample.
 
 Native tables/charts/math/connector adapters, dense Chinese slides, arbitrary-image
 recognition, cross-platform desktop acceptance and large real-slide quality evaluation

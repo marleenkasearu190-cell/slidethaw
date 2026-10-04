@@ -6,8 +6,8 @@ specified scene and content represent this fixture only; `prepare_example.py` do
 recognize arbitrary images.
 
 Source: [HTML](source.html), [raster input](source.png). The page contains only synthetic
-text/layout and a self-authored raster pattern. Code and sample rights await the
-maintainer's final public-license confirmation. No institutional, research or outside
+text/layout and a self-authored raster pattern. The maintainer chose not to set a
+project-wide license for the code or example. No institutional, research or outside
 image assets are included.
 
 ![Source and actual WPS render](comparison-wps.png)

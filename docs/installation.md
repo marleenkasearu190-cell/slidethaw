@@ -16,8 +16,8 @@ No API key is required by the supplied Python tools.
 
 ## Complete Skill installation
 
-Clone [the repository](https://github.com/marleenkasearu190-cell/slidethaw) with an authorized
-account while it is private, or extract the prepared source archive. From the project directory:
+Clone [the public repository](https://github.com/marleenkasearu190-cell/slidethaw),
+or extract the prepared source archive. From the project directory:
 
 ```sh
 python tools/install_skill.py --destination ../slide-work/.agents/skills

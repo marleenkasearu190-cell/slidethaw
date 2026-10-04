@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## v0.1.0-alpha.1 - 2026-10-04
+
+Initial public prerelease; not a stable or general reconstruction-quality benchmark.
 
 - Package the complete existing `rebuild-ppt-image-compare` Skill with metadata version 2.2.
 - Preserve the default editable-only slide, optional comparison pair, frozen baseline,
@@ -12,5 +14,12 @@
 - Retain the original deterministic tests and historical validation record separately
   from fresh repository validation.
 
-Suggested first repository release: `v0.1.0-alpha.1`, pending public scope and license
-approval. Skill metadata version and repository release version are distinct.
+- Publish the audited source, documentation and self-authored synthetic example.
+- Keep host runtimes, credentials, font files and private user projects excluded.
+- Leave the project-wide license unset at the maintainer's explicit request.
+
+Known limits: a compatible host runtime is required; strict PowerPoint saved-copy
+non-target pixel preservation failed; adapters and broader slide-quality benchmarks
+are not validated. See [release notes](docs/releases/v0.1.0-alpha.1.md).
+
+Skill metadata version 2.2 and repository release version are distinct.

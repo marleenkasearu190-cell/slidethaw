@@ -1,0 +1,4 @@
+interface:
+  display_name: "图片还原可编辑PPT"
+  short_description: "按参考图还原单页可编辑PPT，原图内部对照并保留真实渲染与编辑验收"
+  default_prompt: "使用 $rebuild-ppt-image-compare 将我提供的图片还原为仅一页可编辑 PPTX，保留原图布局、文字与数字，原图仅在内部对照，并完成真实渲染检查。"

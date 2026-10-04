@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-04",
+  "fixture": "Self-authored HTML captured as a raster before manually specifying the reconstruction",
+  "pptx_sha256": "ec1e65267ef6b44b71332aba58736b6eedff9c3ae811a8c55f340cff4c388a27",
+  "python": "3.12.14",
+  "pillow": "12.3.0",
+  "node": "24.19.0",
+  "host_bundle": "26.905.11957",
+  "native_text_carriers": 8,
+  "native_groups": 1,
+  "local_image_exceptions": 1,
+  "checks": {
+    "native_build": "PASS",
+    "host_finalizer": "PASS",
+    "structural_qa": "PASS",
+    "wps_14_render": "PASS",
+    "wps_14_edit_reopen": "PASS",
+    "wps_14_non_target_text_geometry_pixels": "PASS",
+    "wps_release_evidence_gate": "PASS",
+    "powerpoint_16_render": "PASS",
+    "powerpoint_16_edit_reopen_operations": "PASS",
+    "powerpoint_16_non_target_text_geometry": "PASS",
+    "powerpoint_16_non_target_pixels": "FAIL",
+    "powerpoint_full_acceptance": "FAIL",
+    "native_tables_charts_math_connectors": "NOT_APPLICABLE",
+    "dense_chinese_example": "NOT_RUN",
+    "large_real_slide_benchmark": "NOT_RUN"
+  },
+  "render_sha256": {
+    "wps_original": "3a43d8efbf40b48e473b93bac86f256e74de28c5628a578a4b944d062a29986e",
+    "wps_edit": "e1d42e8da60019fd63013400f68b6f40248904767c4ef43b72bfe4c61485299c",
+    "powerpoint_original": "4878d041b6fe801691a15f3d038fe0171869bc5e48828ba1a4245f2e56ab3b29",
+    "powerpoint_edit": "b038fd33de31525e60027ff02d481662c88ef1328380688bafade99407e93da4"
+  },
+  "limits": "Synthetic integration fixture only. No fidelity percentage or general quality claim. Full detailed desktop receipts stay in ignored local storage."
+}

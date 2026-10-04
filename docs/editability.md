@@ -1,24 +1,24 @@
-# Editability Boundaries
+# 编辑性边界
 
-| Visible content | Representation | Editing boundary |
+[中文首页](../README.md) | [架构说明](architecture.md) | [验证记录](validation.md)
+
+| 可见内容 | 表示方式 | 编辑边界 |
 | --- | --- | --- |
-| Titles, body, numbers, labels | Native text | Exact wording bound to content manifest; real edit tests required |
-| Frames and simple layout | Native shapes | Position, fill and outline editable |
-| Semantic modules | Actual native groups | Group movement tested in a temporary copy |
-| Complex art, logos, scientific plots | Original crop/image | Can move or resize; internal pixels are not native objects |
-| Tables/charts with reliable source data | Requires a verified native adapter | Basic template does not implement them |
-| Connectors | Requires verified native connection adapter | Endpoints, arrows and movement must be tested |
-| Mathematical expressions | Verified native math or declared image/SVG exception | SVG scaling does not mean formula editability |
+| 标题、正文、数字、标签 | 原生文字 | 与内容清单精确绑定；仍须真实编辑测试 |
+| 边框与简单布局 | 原生形状 | 可编辑位置、填充与轮廓 |
+| 语义模块 | 实际原生分组 | 临时副本中测试整体移动 |
+| 复杂图像、Logo、科学图 | 原图裁切或图片 | 可移动、缩放；内部像素不是原生对象 |
+| 有可靠源数据的表格、图表 | 需要经过验证的原生适配器 | 基础模板尚未实现 |
+| 连接器 | 需要经过验证的原生连接适配器 | 须测试端点、箭头与随对象移动 |
+| 数学表达式 | 经验证的原生数学对象，或声明图片/SVG 例外 | SVG 能缩放不等于公式可编辑 |
 
-The Skill preserves source image dimensions and crops original pixels. It does not
-regenerate logos, maps, experimental curves or scientific formulas. A visible text item
-has one display carrier; hidden text cannot satisfy the content check.
+Skill 保留原图尺寸，裁切原始像素，不重新生成 Logo、地图、实验曲线或科学公式。
+每个可见文字项只有一个显示载体；隐藏文字不能满足内容检查。不能靠猜测补造图表数据。
 
-Local changes use a recorded edit plan and frozen baseline. The tools protect textual
-and structural invariants; deciding whether geometry changes exceed the user's request
-still needs review against the before/after renders.
+局部修改使用记录明确的 edit plan 与冻结基准。工具保护文字和结构不变量，但几何改动是否超出用户范围，仍须对照前后真实渲染审阅。
+混合编辑性是明确说明的设计选择，不把整页背景图或图片内部内容宣传为“全部可编辑”。
 
-The release evidence gate requires the actual final-file hash, matching target software
-receipt, visual observations and evidence paths. Hashes and XML cannot prove glyph
-legibility, clipping, occlusion or mathematical correctness. Unperformed checks remain
-`NOT_RUN`. Inapplicable checks use `NOT_APPLICABLE` with a reason.
+发布验收门要求最终文件实际哈希、匹配目标软件的回执、视觉观察和证据路径。
+哈希与 XML 不能证明字形清晰、没有裁切/遮挡或公式正确。
+未执行的检查保留 `NOT_RUN`；不适用的检查用 `NOT_APPLICABLE` 并说明原因。
+现有示例不包含原生表格、图表、公式或连接器，不是这些适配器的验收证据。

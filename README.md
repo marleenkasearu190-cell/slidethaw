@@ -1,102 +1,101 @@
-# SlideThaw
+# SlideThaw｜把幻灯片图片还原成可编辑 PPT
 
-Turn slide images into editable PowerPoint with a Codex Skill and toolkit.
+[English](README.en.md) | [安装说明](docs/installation.md) | [实际示例](examples/synthetic-overview/README.md) | [v0.1.0-alpha.1 预发布](https://github.com/marleenkasearu190-cell/slidethaw/releases/tag/v0.1.0-alpha.1)
 
-[中文说明](README.zh-CN.md) | [v0.1.0-alpha.1 prerelease](https://github.com/marleenkasearu190-cell/slidethaw/releases/tag/v0.1.0-alpha.1)
+SlideThaw 是将幻灯片截图和 AI 生成设计图重建为可编辑 PowerPoint 的 Codex Skill 与工具包。
+默认每张图输出 **一页可编辑 PPTX**，原图保留在内部工作目录供对照；明确要求双页对照时，才输出原图页和重建页。
+文字、数字和简单布局尽量使用原生对象，复杂图像保留局部素材，并明确编辑性边界。
 
-SlideThaw reconstructs text and layout from slide screenshots or AI-generated slide
-designs. The original image stays inside the working project for comparison. The default
-deliverable is **one editable slide**. A two-slide original/reconstruction comparison is
-available when requested.
+**环境要求：**当前构建器需要兼容 Codex 宿主提供的 `@oai/artifact-tool` 和 Presentations finalizer。
+本项目不包含这些组件，也未验证其公共 npm 安装渠道。最终验收需要 Windows 上的真实 WPS 或 PowerPoint。
+安装 Python 依赖或通过 `unit` 环境检查，不等于已经具备完整转换环境。详见[兼容性说明](docs/compatibility.md)。
 
-**Environment:** the current builder needs a compatible Codex host with
-`@oai/artifact-tool` and the host Presentations finalizer. These components are not
-bundled or advertised as publicly installable npm dependencies. Final acceptance uses
-actual WPS or PowerPoint on Windows. See [compatibility](docs/compatibility.md).
+## 实际示例
 
-## Example
+![左侧为自制合成原图，右侧为真实 WPS 重建渲染](examples/synthetic-overview/comparison-wps.png)
 
-![Synthetic source on the left, actual WPS reconstruction on the right](examples/synthetic-overview/comparison-wps.png)
+[合成示例](examples/synthetic-overview/README.md)从自制 HTML 截图开始，由人工明确场景和内容规格，记录实际构建、渲染与编辑检查。
+素材没有科研结果、机构 Logo 或私人文件；现有示例仍为英文，不是中文密集页面或批量还原质量基准。
+[下载已测试的可编辑示例](examples/synthetic-overview/overview_editable.pptx)。
 
-The [synthetic overview](examples/synthetic-overview/README.md) uses a self-authored HTML
-reference rendered to a screenshot. It contains no research results, institution logos
-or private user files. The example documents the actual build and desktop checks.
-It is a small integration fixture, not a reconstruction-quality benchmark.
-[Download the tested editable example](examples/synthetic-overview/overview_editable.pptx).
-WPS acceptance passed. PowerPoint rendering passed for the final sanitized file;
-its edit operations passed, but its saved copy failed the strict non-target pixel check.
-See [the actual test record](docs/validation.md).
+既有验收中，WPS 完整验收通过；PowerPoint 的最终脱敏文件渲染和编辑操作通过，但保存后的非目标像素严格检查失败。
+本次文档中文化不重建示例，也不把历史结果说成新测试。见[真实验证记录](docs/validation.md)。
 
-## Quick Start
+## 快速开始
 
-Clone the public repository or extract the prepared source archive, install the public
-Python dependency, then copy the complete Skill
-into a **new** repo-scoped Codex discovery directory:
+在 Windows PowerShell 中克隆仓库、建立虚拟环境，并始终使用该环境的解释器：
 
-```sh
+```powershell
 git clone https://github.com/marleenkasearu190-cell/slidethaw.git
 cd slidethaw
-python -m pip install -r requirements.txt
-python tools/install_skill.py --destination ../slide-work/.agents/skills
-python tools/doctor.py
+python -m venv .venv
+& .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+& .\.venv\Scripts\python.exe tools/doctor.py --require unit
+& .\.venv\Scripts\python.exe tools/install_skill.py --destination ../slide-work/.agents/skills
 ```
 
-Open `slide-work` in Codex and invoke:
+安装脚本复制完整 Skill，拒绝覆盖已有目标。打开 `slide-work` 的 Codex 会话，确认已发现 Skill 后调用：
 
 ```text
-Use $rebuild-ppt-image-compare to reconstruct this image as one editable slide.
-Preserve the wording, numbers and layout. Complete real rendering and edit tests.
+使用 $rebuild-ppt-image-compare 将这张图片还原为一页可编辑 PPTX。
+保留原文、数字和布局，完成实际渲染与编辑验收。
 ```
 
-The Skill guides image interpretation, specification, building and review. The scripts
-do not autonomously recognize and convert an arbitrary slide image. Follow
-[installation](docs/installation.md) to resolve host runtime paths and renderer access.
+识图、规格确认和视觉审阅由 Codex 配合工具完成，脚本本身不是任意图片的无人值守识别转换器。
+宿主路径配置、其他平台的安装命令和 Skill 发现规则见[安装说明](docs/installation.md)。
+`load_workspace_dependencies` 是部分宿主提供的工具，不是终端命令，也不保证在所有 Codex 会话中可用。
 
-## Editability
+## 环境检查分级
 
-Titles, body text and simple layout shapes use native PowerPoint objects. Named semantic
-groups support moving a module together. Complex artwork, logos and scientific plots
-can remain original image crops with explicit exceptions.
+`doctor.py` 默认使用 `--require unit`，输出 JSON。分级只决定哪些检查影响退出码，不代表实际构建或验收：
 
-The basic builder supports text, shapes, pictures and groups. Tables, charts,
-connectors and mathematical objects require verified adapters. Unknown chart data
-is preserved as an image. See [editability boundaries](docs/editability.md).
+| 参数 | 必须满足 | 不代表什么 |
+| --- | --- | --- |
+| `--require unit` | 完整 Skill、Python 和 Pillow | 不要求宿主构建组件或 Office；它们显示 `NOT_AVAILABLE` 时仍可能退出 0 |
+| `--require build` | `unit` 条件，加 artifact-tool 实际导入与宿主 finalizer 文件存在 | 不代表已构建、导出或渲染 PPTX |
+| `--require wps` | `build` 条件，加 WPS COM 注册可发现 | 不代表 WPS 渲染、编辑或完整验收通过 |
+| `--require powerpoint` | `build` 条件，加 PowerPoint COM 注册可发现 | 不代表 PowerPoint 渲染、编辑或完整验收通过 |
 
-## How It Works
+完成实际宿主配置后，再按所用软件执行 `--require build` 和 `--require wps` 或 `--require powerpoint`。
+不要仅凭 COM 注册或结构 `PASS` 宣称兼容性。
 
-1. Preserve the source bytes and normalize image orientation without downsampling.
-2. Confirm four specifications for the deck, content, scene and authorized edits.
-3. Freeze the baseline, build native objects, then bind image names and native groups.
-4. Finalize with the host toolchain and reopen the saved file in the target application.
-5. Inspect actual renders and temporary edit copies before claiming acceptance.
+## 编辑性与工作流程
 
-Content bindings reject missing or altered text. A structural `PASS` is distinct from
-rendering, visual review and editing acceptance. Diagnostic image differences do not
-produce a fidelity percentage. See [architecture](docs/architecture.md).
+标题、正文、数字和简单框架使用原生文字、形状；语义分组支持整体移动。
+复杂图片、Logo、科学图和复杂公式可保留原始像素裁切。它们能移动、缩放，不意味着内部内容可原生编辑。
+基础构建器支持文字、形状、图片和分组；表格、图表、连接器和数学对象需要经过验证的适配器。
+不能通过曲线或柱高猜测原始数据。见[编辑性说明](docs/editability.md)。
 
-## Validation And Limits
+| 请求 | 输出和保护约定 |
+| --- | --- |
+| 默认忠实重建 | 一页可编辑输出，原图内部对照，保留文字、数字和布局 |
+| 混合编辑性 | 原生对象与明确声明的局部图像例外共存 |
+| 指定范围修改 | 用 edit plan 记录授权，保护冻结基准与非目标内容 |
+| 明确要求双页对照 | 原图在第一页，重建在第二页 |
 
-Run the public suites with Python and Pillow:
+流程保留四份规格：页面、完整内容、对象结构和授权修改。冻结基准后构建、绑定、导出，再用目标软件重新打开、真实渲染、审阅和编辑临时副本。
+内容绑定拒绝漏字、改字；结构检查不能代替视觉与编辑验收。像素差分只用于诊断，不生成“还原率”。见[架构说明](docs/architecture.md)。
 
-```sh
-python -B -m unittest discover -s skills/rebuild-ppt-image-compare/tests -v
-python -B -m unittest discover -s tests -v
-python tools/check_links.py
+## 测试与已知限制
+
+在上述虚拟环境中运行便携测试与文档检查：
+
+```powershell
+& .\.venv\Scripts\python.exe -B -m unittest discover -s skills/rebuild-ppt-image-compare/tests -v
+& .\.venv\Scripts\python.exe -B -m unittest discover -s tests -v
+& .\.venv\Scripts\python.exe tools/check_links.py
 ```
 
-[Validation record](docs/validation.md) distinguishes fresh tests from the preserved
-v2.2 historical record. Office tests are local, separate from CI. No universal fidelity,
-full editability, unattended conversion or platform compatibility claim is made.
+[验证记录](docs/validation.md)分别记录首发的 42 项原始测试、9 项打包测试及本次改造检查。
+CI 不运行桌面 Office，不下载宿主运行时。链接检查覆盖 Markdown 正文中的本地文件和图片链接，不验证 GitHub 锚点、外部网页或完整 Markdown 语法。
+未经执行的能力如实标为 `NOT_RUN`，不宣称通用还原率、全部原生编辑、无人值守转换或跨平台桌面兼容性。
 
-## Contributing
+## 维护与贡献
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md), [security guidance](SECURITY.md) and
-[troubleshooting](docs/troubleshooting.md). The Skill invocation name remains
-`rebuild-ppt-image-compare`, with metadata version 2.2. The first repository prerelease is
-`v0.1.0-alpha.1`; see its [release notes](docs/releases/v0.1.0-alpha.1.md).
+原 Skill 调用名仍为 `rebuild-ppt-image-compare`，元数据版本仍为 2.2；仓库首发版本为 `v0.1.0-alpha.1`。
+见[首发中文说明](docs/releases/v0.1.0-alpha.1.zh-CN.md)和保留的[英文版本说明](docs/releases/v0.1.0-alpha.1.md)。
+旧入口 [README.zh-CN.md](README.zh-CN.md)继续保留。
 
-This independent project is maintained by [marleenkasearu190-cell](https://github.com/marleenkasearu190-cell).
-The [repository](https://github.com/marleenkasearu190-cell/slidethaw) is public.
-The maintainer has chosen not to assign a project-wide license at this time. Public
-availability does not imply an MIT, Apache-2.0 or other project-wide open-source license.
-External components retain their own terms. See [third-party notices](THIRD_PARTY_NOTICES.md).
+阅读[贡献指南](CONTRIBUTING.md)、[安全说明](SECURITY.md)、[排错说明](docs/troubleshooting.md)和[第三方声明](THIRD_PARTY_NOTICES.md)。
+本项目由 [marleenkasearu190-cell](https://github.com/marleenkasearu190-cell) 独立维护，不是 OpenAI、Microsoft、WPS 或 GitHub 的官方产品。
+维护者选择暂不设置项目许可证；仓库公开不代表已授予 MIT、Apache-2.0 等项目级开源许可。外部组件仍适用其各自条款。

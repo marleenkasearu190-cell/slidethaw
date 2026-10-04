@@ -1,5 +1,13 @@
 # Changelog
 
+## 未发布：中文优先改造
+
+- 中文默认首页与用户指南，保留英文入口和旧中文章节。
+- 明确 `unit/build/wps/powerpoint` 的环境检查边界，不改变 CLI 或机器字段。
+- 本地文档链接检查提前剪枝依赖、缓存与构建目录，增加中文路径和诊断分级回归测试。
+- 便携 CI 补充 `main` push 触发；不运行 Office，不新增 Release、tag 或许可证。
+- 既有英文示例与真实验收记录保留，不声明新增中文质量验证。
+
 ## v0.1.0-alpha.1 - 2026-10-04
 
 Initial public prerelease; not a stable or general reconstruction-quality benchmark.

@@ -1,32 +1,31 @@
-# Architecture
+# 架构说明
 
-`skills/rebuild-ppt-image-compare/` is the complete existing v2.2 Skill. Its core
-scripts and templates were copied intact. Packaging helpers live in `tools/`.
+[中文首页](../README.md) | [编辑性边界](editability.md) | [验证记录](validation.md)
 
-| Stage | Existing implementation |
+`skills/rebuild-ppt-image-compare/` 是完整的既有 v2.2 Skill；原有脚本、模板、调用名与元数据保留不变。
+发布辅助工具放在 `tools/`，不是另一套重建引擎。
+
+| 阶段 | 既有实现 |
 | --- | --- |
-| Isolated project and source preservation | `init_compare_project.py` |
-| Cross-file specification validation | `contracts.py`, `validate_specs.py` |
-| Content baseline lock | `freeze_baseline.py` |
-| Original-pixel crop and provenance | `crop_asset.py` |
-| Basic native authoring | `build_compare.mjs` using artifact-tool |
-| Image-name binding and native group postprocessing | `bind_native.py` |
-| Final export checks | `finalize_compare.mjs` using host finalizer |
-| Package/content inspection | `pptx_inspect.py`, `qa_compare_pptx.py` |
-| Actual render and temporary edit copy | `office_render.ps1` |
-| Diagnostic differences | `visual_diff.py` |
+| 隔离工作项目并保留原图 | `init_compare_project.py` |
+| 跨文件规格校验 | `contracts.py`、`validate_specs.py` |
+| 冻结内容基准 | `freeze_baseline.py` |
+| 原始像素裁切与来源记录 | `crop_asset.py` |
+| 基础原生构建 | `build_compare.mjs`，使用 artifact-tool |
+| 图片命名绑定与原生分组后处理 | `bind_native.py` |
+| 最终导出检查 | `finalize_compare.mjs`，使用宿主 finalizer |
+| PPTX 包与内容检查 | `pptx_inspect.py`、`qa_compare_pptx.py` |
+| 真实渲染与临时副本编辑 | `office_render.ps1` |
+| 诊断差分 | `visual_diff.py` |
 
-The four specifications are `deck_spec.json`, `content_manifest.json`, `scene_graph.json`
-and `edit_plan.json`. The content manifest stays intact after freezing. Approved removal
-expands through descendants of the frozen scene. Authorized replacements are expressed
-in the edit plan rather than changing the baseline.
+四份规格为 `deck_spec.json`、`content_manifest.json`、`scene_graph.json` 和 `edit_plan.json`。
+冻结后内容清单保持不变；获准删除的范围沿冻结场景的子节点展开。替换内容写入 edit plan，而不是直接篡改基准。
+这些文件、字段名与机器状态不因文档中文化而更名。
 
-The original image is internal in `editable_only` mode. `comparison` mode creates the
-reference slide first and the editable slide second. The scene binding and QA page
-mapping follow the selected mode.
+默认 `editable_only` 模式中，原图仅内部对照；`comparison` 模式先输出参考页，再输出可编辑页。
+对象绑定与 QA 页码映射跟随模式，双页对照只能在用户要求时生成。
 
-New publishing helpers provide environment diagnosis, safe complete-folder installation
-and Markdown-link checks. They are separately tested and do not change the authoring engine.
-The synthetic fixture prep script is a manually specified example, not an image recognition
-engine. Test receipts created inside unit fixtures exercise rejection/acceptance schemas
-and are explicitly not evidence of actual Office operation.
+发布工具提供环境诊断、安全复制完整目录、文档链接检查与发布审计；它们单独测试，不改变 authoring engine。
+示例准备脚本使用人工明确的场景与内容，不是任意图片识别引擎。
+单元测试中的模拟回执只验证接受/拒绝规则，不能充当真实 Office 操作证据。
+最终文件还须哈希匹配、真实渲染、视觉观察和编辑验收，不能只依靠 XML 或结构 `PASS`。

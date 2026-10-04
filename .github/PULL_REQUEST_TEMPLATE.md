@@ -1,11 +1,13 @@
-## Change
+## 实际改动
 
-Describe the concrete problem and resulting behavior.
+说明解决的问题、实际改动与行为变化。
 
-## Validation
+## 验证结果
 
-List actual tests and local acceptance checks. Mark unperformed checks NOT_RUN.
+列出实际运行的测试与本地验收；未执行项标为 `NOT_RUN`。
+区分单元/文档检查、宿主构建、真实渲染及编辑验收，不把历史证据说成本轮新测试。
 
-## Compatibility And Sample Rights
+## 兼容性与示例权利
 
-Explain runtime requirements, editing exceptions and provenance of any added sample.
+说明运行时要求、编辑性例外及新增示例的来源与授权。
+确认未擅自修改调用名、核心引擎、输出约定或许可证。

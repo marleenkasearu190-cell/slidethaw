@@ -23,9 +23,10 @@ WPS 完整验收通过；最终脱敏副本的 PowerPoint 渲染通过，编辑�
 
 ## 快速开始
 
-解压本地源码包后，在项目目录执行：
+克隆仓库（私有阶段需要授权访问），或解压源码包后，在项目目录执行：
 
 ```sh
+git clone https://github.com/marleenkasearu190-cell/slidethaw.git
 cd slidethaw
 python -m pip install -r requirements.txt
 python tools/install_skill.py --destination ../slide-work/.agents/skills
@@ -69,8 +70,8 @@ python tools/check_links.py
 本项目由 [marleenkasearu190-cell](https://github.com/marleenkasearu190-cell) 独立维护，不代表 OpenAI、WPS 或 Microsoft 官方产品。
 原调用名保留为 `rebuild-ppt-image-compare`，Skill 元数据版本为 2.2。
 建议仓库首发版本为 `v0.1.0-alpha.1`，实际 Release 创建后再补链接。
-维护者已暂缓 GitHub 登录和上传，目前尚未创建远程仓库或 Release。
-公开前需要维护者确认代码与素材授权及许可证。
+[GitHub 仓库](https://github.com/marleenkasearu190-cell/slidethaw)目前为私有仓库，尚未发布公开 Release。
+公开前需要维护者确认公开范围、代码与素材授权及许可证。
 
 阅读[贡献指南](CONTRIBUTING.md)、[安全说明](SECURITY.md)、[排错说明](docs/troubleshooting.md)
 和[第三方声明](THIRD_PARTY_NOTICES.md)。

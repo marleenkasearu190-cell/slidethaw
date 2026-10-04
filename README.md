@@ -29,10 +29,12 @@ See [the actual test record](docs/validation.md).
 
 ## Quick Start
 
-Extract the prepared source archive, install the public Python dependency, then copy the complete Skill
+Clone the repository (authorized access is required while it is private) or extract the
+prepared source archive, install the public Python dependency, then copy the complete Skill
 into a **new** repo-scoped Codex discovery directory:
 
 ```sh
+git clone https://github.com/marleenkasearu190-cell/slidethaw.git
 cd slidethaw
 python -m pip install -r requirements.txt
 python tools/install_skill.py --destination ../slide-work/.agents/skills
@@ -94,6 +96,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md), [security guidance](SECURITY.md) and
 release is `v0.1.0-alpha.1`; a release will be linked only after it actually exists.
 
 This independent project is maintained by [marleenkasearu190-cell](https://github.com/marleenkasearu190-cell).
-GitHub upload is deferred at the maintainer's request. No remote repository or Release
-has been created. Code licensing is pending the maintainer's confirmation before public release.
+The [repository](https://github.com/marleenkasearu190-cell/slidethaw) is currently private.
+No public Release has been published. Public scope and code licensing remain subject
+to the maintainer's confirmation before public release.
 External components retain their own terms. See [third-party notices](THIRD_PARTY_NOTICES.md).

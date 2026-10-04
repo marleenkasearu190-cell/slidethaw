@@ -2,7 +2,7 @@
 
 保留设计，还原可编辑的文字与结构。
 
-[English](README.md)
+[English](README.md) | [v0.1.0-alpha.1 预发布](https://github.com/marleenkasearu190-cell/slidethaw/releases/tag/v0.1.0-alpha.1)
 
 SlideThaw 是将幻灯片截图和 AI 生成设计图重建为可编辑 PowerPoint 的 Codex Skill 与工具包。
 默认每张图独立输出 **一页可编辑 PPTX**，原图留在内部工作目录供对照。

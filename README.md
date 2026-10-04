@@ -2,7 +2,7 @@
 
 Turn slide images into editable PowerPoint with a Codex Skill and toolkit.
 
-[中文说明](README.zh-CN.md)
+[中文说明](README.zh-CN.md) | [v0.1.0-alpha.1 prerelease](https://github.com/marleenkasearu190-cell/slidethaw/releases/tag/v0.1.0-alpha.1)
 
 SlideThaw reconstructs text and layout from slide screenshots or AI-generated slide
 designs. The original image stays inside the working project for comparison. The default

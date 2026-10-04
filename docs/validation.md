@@ -43,9 +43,12 @@ The rewriter was fixed and a regression test added. The corrected final copy was
 reopened/rendered in PowerPoint 16.0 successfully; its PNG hash matches the original
 PowerPoint render. The broken intermediate copy is excluded from distribution.
 
-Portable CI is prepared with read-only permissions and verified upstream action SHAs.
-It does not run desktop Office or download the private host runtime. Initial private
-push does not automatically start CI; any unrun workflow remains `NOT_RUN`.
+Portable CI uses read-only permissions and verified upstream action SHAs. After the
+repository became public, [manual CI run 37186807382](https://github.com/marleenkasearu190-cell/slidethaw/actions/runs/37186807382)
+passed on Ubuntu with Python 3.12: 42 original tests, 9 packaging tests and local Markdown
+links. The tested commit was `e8b4f189c9b0ce47c85c533e6716928eb108f436`; subsequent
+publication records change documentation only. CI does not run desktop Office or
+download the host runtime. Unperformed desktop or broader quality checks remain `NOT_RUN`.
 
 Release-path/document auditing passed, including expanded PPTX metadata, notes,
 relationships, embeddings and font checks. Gitleaks 8.30.1 scanned the isolated

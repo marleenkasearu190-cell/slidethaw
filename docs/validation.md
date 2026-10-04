@@ -1,64 +1,64 @@
-# Validation Record
+# 真实验证记录
 
-Fresh packaging validation date: **2026-10-04**. This record contains completed
-checks for the prepared repository; the preserved [Skill v2.2 record](../skills/rebuild-ppt-image-compare/VALIDATION.md)
-describes historical work and is not a claim that those tests were repeated here.
+[中文首页](../README.md) | [兼容性说明](compatibility.md) | [实际示例](../examples/synthetic-overview/README.md)
 
-The original 42 deterministic tests passed with host Python 3.12.14 and Pillow 12.3.0.
-Managed-sandbox attempts initially failed to write Python temporary files. The same
-unmodified suite passed with normal local permissions in a dedicated scratch directory.
+## 首发打包验收：2026-10-04
 
-| Check | Actual result and scope |
+以下是已经完成的首发仓库验收，不因中文化而宣称重新执行。
+保留的 [Skill v2.2 记录](../skills/rebuild-ppt-image-compare/VALIDATION.md)属于更早的工作，也不表示在此重跑。
+
+原始 42 项确定性测试在宿主 Python 3.12.14、Pillow 12.3.0 上通过。
+最初托管沙箱尝试因 Python 临时文件写入被拒绝而失败；在专用 scratch 目录、正常本地权限下，同一套未修改测试通过。
+
+| 检查 | 真实结果与范围 |
 | --- | --- |
-| Existing deterministic suite | PASS, 42 tests |
-| New packaging suite | PASS, 9 tests including installation, sample preparation, privacy rejection, metadata sanitization and namespace preservation |
-| Native build and host finalizer | PASS, actual artifact-tool export, package/layout/font/import checks |
-| Content and grouping | PASS, 8 exact native text carriers, one actual semantic group, one local image exception |
-| WPS 14.0 render | PASS, actual single-slide PNG at 1280 x 720 |
-| WPS edit/reopen | PASS, native title replacement and group movement by 8 design pixels |
-| WPS non-target preservation | PASS, text/geometry unchanged and no changed pixels outside the permitted regions |
-| WPS release evidence gate | PASS after final-file hash, real render receipt, visual review and edits were checked |
-| PowerPoint 16.0 render | PASS, actual single-slide PNG at 1280 x 720 |
-| PowerPoint edit/reopen operations | PASS, title replacement and group/child movement persisted |
-| PowerPoint exact non-target pixel preservation | FAIL, pixels differ in unchanged text regions after saving the temporary copy; text and geometry still match |
-| PowerPoint full acceptance | Not claimed because the strict non-target pixel check failed |
+| 既有确定性测试 | `PASS`，42 项 |
+| 首发打包测试 | `PASS`，9 项，含安装、示例准备、隐私拒绝、元数据清理和命名空间保留 |
+| 原生构建与宿主 finalizer | `PASS`，实际 artifact-tool 导出、包/布局/字体/import 检查 |
+| 内容与分组 | `PASS`，8 个精确原生文字载体、1 个实际语义分组、1 个局部图片例外 |
+| WPS 14.0 渲染 | `PASS`，实际单页 PNG，1280 × 720 |
+| WPS 编辑并重新打开 | `PASS`，原生标题替换、分组右移 8 个设计像素 |
+| WPS 非目标保护 | `PASS`，文字/几何不变，许可区域外无变化像素 |
+| WPS 发布证据门 | `PASS`，最终哈希、真实渲染回执、视觉审阅和编辑均检查 |
+| PowerPoint 16.0 渲染 | `PASS`，实际单页 PNG，1280 × 720 |
+| PowerPoint 编辑并重新打开 | `PASS`，标题替换与分组/子对象移动保持 |
+| PowerPoint 非目标像素严格保护 | `FAIL`，保存临时副本后，未修改文字区域像素不同；文字与几何仍一致 |
+| PowerPoint 完整验收 | 不宣称通过，因为严格非目标像素检查失败 |
 
-The preserved output PPTX SHA256 is
-`ec1e65267ef6b44b71332aba58736b6eedff9c3ae811a8c55f340cff4c388a27`.
-All actual before/after renders were opened and inspected. The WPS result is the complete
-acceptance record for this fixture. PowerPoint's saved-copy rendering limitation remains
-visible; no test was deleted or relaxed to present a full PASS.
+分发的 PPTX SHA256 为：
+`ec1e65267ef6b44b71332aba58736b6eedff9c3ae811a8c55f340cff4c388a27`。
+实际前后渲染均已打开审阅。WPS 是该示例的完整验收记录；PowerPoint 保存副本的渲染限制继续保留，没有删除或放宽测试来显示完整 `PASS`。
 
-The reference is self-authored HTML captured by Edge through Playwright, not an editable
-source PowerPoint. The core adapter/templates were unchanged. The example's scene and
-content were manually specified and checked. No reconstruction-time benchmark is reported.
-Small text baseline differences between the HTML source and Office renders remain.
-The original generated file contained exporter author fields. A separate publication copy
-clears those fields without changing slide XML/media; the host finalizer was rerun and
-the sanitized file was reopened/rendered in WPS. Its WPS render and edit renders have
-the same SHA256 as the pre-sanitization renders. Original files and detailed evidence
-remain in local ignored storage. The first metadata rewriter lost namespace declarations
-used by date-field QName attributes, causing PowerPoint to refuse that intermediate copy.
-The rewriter was fixed and a regression test added. The corrected final copy was actually
-reopened/rendered in PowerPoint 16.0 successfully; its PNG hash matches the original
-PowerPoint render. The broken intermediate copy is excluded from distribution.
+参考图是通过 Playwright 控制 Edge 截取的自制 HTML，不是隐藏的可编辑源 PowerPoint。
+核心适配器与模板未变；场景和内容经过人工明确与检查。未报告重建耗时基准。
+HTML 原图和 Office 渲染间仍有少量文字基线差异。
 
-Portable CI uses read-only permissions and verified upstream action SHAs. After the
-repository became public, [manual CI run 37186807382](https://github.com/marleenkasearu190-cell/slidethaw/actions/runs/37186807382)
-passed on Ubuntu with Python 3.12: 42 original tests, 9 packaging tests and local Markdown
-links. The tested commit was `e8b4f189c9b0ce47c85c533e6716928eb108f436`; subsequent
-publication records change documentation only. CI does not run desktop Office or
-download the host runtime. Unperformed desktop or broader quality checks remain `NOT_RUN`.
+首次生成文件含导出器作者字段。单独的发布副本清理这些字段，不改幻灯片 XML/media；之后重新运行宿主 finalizer，并实际在 WPS 打开、渲染。
+清理前后的 WPS 渲染和编辑渲染 SHA256 一致。原文件与详细证据保留在本地忽略目录。
+首次元数据重写曾丢失日期字段 QName 属性使用的命名空间声明，导致 PowerPoint 拒绝该中间副本。
+修复后增加回归测试；正确最终副本在 PowerPoint 16.0 实际打开、渲染成功，PNG 哈希与原 PowerPoint 渲染一致。
+损坏的中间副本不分发。
 
-Release-path/document auditing passed, including expanded PPTX metadata, notes,
-relationships, embeddings and font checks. Gitleaks 8.30.1 scanned the isolated
-distribution snapshot plus expanded PPTX XML and reported no leaks. No credentials,
-personal source paths, runtime files, fonts or original user projects are distributed.
-This combines automated checks with source/material review; it is not an absolute
-security guarantee. The maintainer authorized public publication and explicitly chose
-not to set a project-wide license for the source or sample.
+## 既有公共 CI 与发布审计
 
-Native tables/charts/math/connector adapters, dense Chinese slides, arbitrary-image
-recognition, cross-platform desktop acceptance and large real-slide quality evaluation
-are **NOT_RUN** in this release preparation. Synthetic fixtures do not establish those
-capabilities or a fidelity percentage.
+仓库公开后，[手动 CI 37186807382](https://github.com/marleenkasearu190-cell/slidethaw/actions/runs/37186807382)
+在 Ubuntu、Python 3.12 上通过：42 项原始测试、9 项打包测试及本地 Markdown 链接。
+测试提交为 `e8b4f189c9b0ce47c85c533e6716928eb108f436`；之后的发布记录只改文档。
+CI 使用只读权限和核实过的上游 action SHA，不运行桌面 Office，也不下载宿主运行时。
+未执行的桌面或更广质量检查保持 `NOT_RUN`。
+
+发布路径/文档审计通过，含展开 PPTX 的元数据、备注、关系、嵌入对象及字体检查。
+Gitleaks 8.30.1 扫描隔离发布快照及展开的 PPTX XML，未发现泄露。
+分发不包含凭据、个人源路径、宿主运行时、字体文件或原始用户项目。
+自动检查结合源码与素材审阅，不构成绝对安全保证。
+维护者已授权公开，并明确选择暂不设置代码或示例的项目级许可证。
+
+## 中文优先改造的验证边界
+
+本次以最新 `main` 的 `3724841b2983ea5a2cd683ba75e2711d5a175735` 为基线，更新用户文档、链接检查、诊断分级回归测试与 CI 触发规则。
+本轮实际命令与结果另记于[中文化检查记录](chinese-first-validation.md)，不覆盖上面的首发记录。
+Skill 原始脚本/模板、示例 PPTX/PNG、机器字段和既有许可证选择不变。
+本轮不重新构建或执行 Office 编辑验收，也不声称新增中文示例。
+
+原生表格/图表/公式/连接器适配器、中文密集页面、任意图片识别、跨平台桌面验收和大规模真实页面质量评估，在首发准备中均为 **`NOT_RUN`**。
+合成示例不能证明这些能力或任何还原率。

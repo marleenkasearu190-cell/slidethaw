@@ -1,19 +1,26 @@
-# Troubleshooting
+# 排错说明
 
-| Symptom | Action |
+[中文首页](../README.md) | [安装说明](installation.md) | [验证记录](validation.md)
+
+| 现象 | 排查方法 |
 | --- | --- |
-| Skill not found | Verify the complete folder in `.agents/skills`, open that workspace in Codex and restart if needed |
-| Installer refuses destination | Use a new discovery directory; do not overwrite an existing installation |
-| `No module named PIL` | Install `requirements.txt` in the actual Python interpreter being used |
-| artifact-tool import fails | Resolve the compatible host runtime; do not assume public npm installation is available |
-| Finalizer path missing | Resolve the host's installed Presentations Skill and set `SKILL_DIR` |
-| Project not ready | Inspect image, confirm the four specs and verify the current style family |
-| Frozen baseline changed | Express approved changes in edit plan or create a new authorized revision |
-| Missing or ambiguous image binding | Check original crop, embedded-pixel hash and geometry; never bind by sequence number |
-| Unsupported native object type | Add and validate an adapter for that specific object; do not silently rasterize required native content |
-| COM unavailable or render fails | Record the target-software failure; installed Office and desktop-session permissions must be checked |
-| Test temporary directory denied by a managed sandbox | Run authorized tests with normal local permissions in a dedicated scratch directory; preserve the failed attempt record |
-| Structural PASS but bad layout | Inspect real renders, then repair the named object and export a new revision |
+| Codex 找不到 Skill | 检查 `.agents/skills` 中完整目录，在对应工作区打开会话，必要时重启；避免同名多份安装 |
+| 安装器拒绝目标 | 使用新的发现目录，不覆盖已有安装 |
+| `No module named PIL` | 用实际执行脚本的解释器安装 `requirements.txt`，不要把依赖装到另一个 Python |
+| `unit` 退出 0，但显示宿主项 `NOT_AVAILABLE` | 这是分级设计；`unit` 只要求完整 Skill、Python、Pillow，并不表示构建环境可用 |
+| `build` 退出 1，而 `unit` 通过 | 检查实际 artifact-tool 导入及 `SKILL_DIR` 下的 finalizer；不等于 Python 安装失败 |
+| artifact-tool 导入失败 | 解析兼容宿主运行时；不假设存在已验证的公共 npm 安装方式 |
+| finalizer 路径缺失 | 找到实际安装的 Presentations Skill，设置 `SKILL_DIR`，不要误填重建 Skill 目录 |
+| 终端找不到 `load_workspace_dependencies` | 它是部分宿主提供的工具，不是终端命令；当前会话未提供时，核实实际宿主能力和路径 |
+| `wps/powerpoint` 通过但无法打开 PPTX | COM 注册探测不是渲染验收；检查真实应用、文件、桌面会话与权限，并记录失败回执 |
+| 项目尚未就绪 | 检查图片、确认四份规格及当前风格族，初始化目录不是完成构建 |
+| 冻结基准被改动 | 把获准改动写进 edit plan，或创建新的授权修订 |
+| 图片绑定缺失或歧义 | 检查原始裁切、嵌入像素哈希和几何信息，不按对象序号绑定 |
+| 不支持的原生对象类型 | 为具体对象补充并验证适配器，不悄悄把必需原生内容栅格化 |
+| COM 不可用或渲染失败 | 记录目标软件失败，检查 Office 安装、桌面会话及权限 |
+| 托管沙箱拒绝测试临时目录 | 在获准的正常本地权限下，使用专用 scratch 目录运行同一套测试；保留失败尝试记录 |
+| 结构 `PASS` 但布局不对 | 检查真实渲染，修复指定对象并导出新修订 |
+| PowerPoint 保存后的非目标像素检查失败 | 保留失败证据；不能降低门槛或把编辑操作通过说成完整验收通过 |
 
-The renderer closes only the presentation it opened. It does not quit or kill the user's
-Office application. Failed receipts remain evidence of failure, not successful compatibility.
+渲染器只关闭自己打开的演示文稿，不退出或杀死用户的 Office 应用。
+失败回执是失败证据，不是兼容性通过。排错不能通过改写历史记录或伪造回执解决。

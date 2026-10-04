@@ -1,8 +1,9 @@
 name: Portable checks
 
-# Initial private upload does not auto-start a billed private-repository workflow.
-# Maintainers can dispatch this explicitly; public pull requests run portable tests.
+# Portable checks only; desktop rendering and editing require separate local evidence.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
   pull_request:
 
@@ -18,7 +19,11 @@ jobs:
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # verified v6
         with:
           python-version: '3.12'
-      - run: python -m pip install -r requirements.txt
-      - run: python -B -m unittest discover -s skills/rebuild-ppt-image-compare/tests -v
-      - run: python -B -m unittest discover -s tests -v
-      - run: python tools/check_links.py
+      - name: 安装便携依赖
+        run: python -m pip install -r requirements.txt
+      - name: 原始 Skill 单元测试
+        run: python -B -m unittest discover -s skills/rebuild-ppt-image-compare/tests -v
+      - name: 打包与文档回归测试
+        run: python -B -m unittest discover -s tests -v
+      - name: 本地 Markdown 文件与图片链接
+        run: python tools/check_links.py

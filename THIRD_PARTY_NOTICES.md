@@ -1,23 +1,20 @@
-# Third-Party Notices And Provenance
+# 第三方声明与素材来源
 
-The reconstruction Skill is the user's complete existing v2.2 implementation. No source
-license was found in that folder. The maintainer authorized public publication and
-explicitly chose not to assign a project-wide license. No MIT, Apache-2.0 or other
-project-wide open-source license is assigned to the Skill or synthetic example.
-The original Skill metadata and validation record are preserved. New publishing helpers,
-documentation and the explicitly synthetic example were authored during this packaging task.
+重建 Skill 来自用户完整的既有 v2.2 实现，原目录未发现源代码许可证。
+维护者已授权公开，并明确选择暂不设置项目级许可证；Skill 或合成示例均未被赋予 MIT、Apache-2.0 等项目级开源许可。
+原 Skill 元数据与验证记录保留不变；发布辅助工具、文档及明确声明的自制示例是在打包任务中编写的。
+本次文档中文化不改变这些授权选择。
 
-| External component | Source / terms | Included here? |
+| 外部组件 | 来源与条款 | 是否包含在项目中 |
 | --- | --- | --- |
-| Pillow | [Official project and license](https://github.com/python-pillow/Pillow/blob/main/LICENSE) | Dependency declaration only |
-| Playwright | [Official project](https://github.com/microsoft/playwright), Apache-2.0 | Optional example capture script imports it; library/browser not bundled |
-| Codex / artifact-tool / Presentations | Host-provided OpenAI components under their own terms | No runtime or system Skill files bundled |
-| WPS / Microsoft PowerPoint | Separately licensed desktop applications | No binaries included |
-| Arial and other fonts | Operating system/vendor licenses | Font names only; no font files or embedded fonts |
-| GitHub Actions | Upstream action repositories under their own licenses | Workflow references only |
+| Pillow | [官方项目与许可证](https://github.com/python-pillow/Pillow/blob/main/LICENSE) | 仅声明依赖 |
+| Playwright | [官方项目](https://github.com/microsoft/playwright)，Apache-2.0 | 可选截图脚本导入；不打包库或浏览器 |
+| Codex / artifact-tool / Presentations | 宿主提供的 OpenAI 组件，各自适用其条款 | 不打包运行时或系统 Skill 文件 |
+| WPS / Microsoft PowerPoint | 单独许可的桌面应用 | 不包含二进制 |
+| Arial 及其他字体 | 系统/供应商许可 | 仅引用字体名称，不附带或嵌入字体 |
+| GitHub Actions | 上游 action 仓库，各自适用其许可证 | 仅工作流引用 |
 
-The synthetic HTML and its raster outputs contain no outside logos, photos, unpublished
-research or external data. The generated PPTX preserves a crop of that synthetic image.
-No third-party sample slide or existing user presentation is included.
+自制 HTML 及其栅格输出没有外部 Logo、照片、未公开研究或外部数据。生成的 PPTX 保留该合成图片的局部裁切。
+项目不包含第三方示例幻灯片或用户既有演示文稿。
 
-This independent project has no official endorsement from OpenAI, Microsoft, WPS or GitHub.
+本项目独立维护，未获 OpenAI、Microsoft、WPS 或 GitHub 的官方背书。

@@ -1,19 +1,19 @@
 ---
-name: Feature request
-about: Describe a concrete reconstruction or editing need
+name: 功能建议
+about: 描述具体的图片重建或编辑需求
 title: ""
 labels: ""
 assignees: ""
 ---
 
-## Use Case
+## 使用场景
 
-Describe the slide and editing task, including the required target software.
+说明幻灯片与编辑任务，包括所需目标软件。
 
-## Proposed Behavior
+## 期望行为
 
-Explain the desired result and content/editability requirements.
+说明期望结果，以及内容保护和编辑性要求。
 
-## Evidence And Rights
+## 示例与素材权利
 
-Use synthetic or authorized examples only. Identify any required native object types.
+仅使用自制或明确获准的示例，说明需要哪些原生对象；不要附私人或未经授权素材。

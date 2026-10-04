@@ -1,24 +1,24 @@
 ---
-name: Bug report
-about: Report a reproducible failure with safe evidence
+name: 问题报告
+about: 使用脱敏证据报告可复现的问题
 title: ""
 labels: ""
 assignees: ""
 ---
 
-## Expected And Actual Behavior
+## 预期与实际行为
 
-Describe the failing action and what happened.
+说明失败的操作、预期结果与实际发生的情况。
 
-## Reproduction
+## 复现步骤
 
-Include the command or Codex request and a minimal synthetic/authorized sample.
+提供命令或 Codex 请求，并附最小自制或获准使用的示例。
 
-## Environment
+## 运行环境
 
-Python, Node/host runtime, OS, target application/version and Skill version.
+记录 Python、Node/宿主运行时、系统、目标应用及版本、Skill 版本，以及所选 `--require` 层级。
 
-## Evidence
+## 验证证据
 
-Include redacted error types and check statuses. Remove credentials, private paths and
-confidential slide content. Structure-only PASS is not full acceptance.
+提供脱敏错误类型和检查状态。删除凭据、私人路径与机密幻灯片内容。
+结构 `PASS` 不等于完整验收；未执行的检查标为 `NOT_RUN`。
